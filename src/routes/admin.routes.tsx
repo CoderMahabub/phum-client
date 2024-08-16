@@ -42,7 +42,7 @@ const adminPaths2 = [
     ],
   },
 ];
-const adminPaths = [
+export const adminPaths = [
   {
     name: "Dashboard",
     path: "admin/dashboard",
@@ -71,23 +71,23 @@ const adminPaths = [
 ];
 
 // Proggraming way
-export const adminRoutes = adminPaths2.reduce((acc: TRoute[], item) => {
-  if (item.path && item.element) {
-    acc.push({
-      path: item.path,
-      element: item.element,
-    });
-  }
-  if (item.children) {
-    item.children.forEach((child) => {
-      acc.push({
-        path: child.path,
-        element: child.element,
-      });
-    });
-  }
-  return acc;
-}, []);
+// export const adminRoutes = adminPaths2.reduce((acc: TRoute[], item) => {
+//   if (item.path && item.element) {
+//     acc.push({
+//       path: item.path,
+//       element: item.element,
+//     });
+//   }
+//   if (item.children) {
+//     item.children.forEach((child) => {
+//       acc.push({
+//         path: child.path,
+//         element: child.element,
+//       });
+//     });
+//   }
+//   return acc;
+// }, []);
 
 // // Proggraming way
 // export const adminRoutes = adminPaths2.reduce((acc: TRoute[], item) => {
