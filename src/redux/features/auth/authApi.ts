@@ -9,9 +9,6 @@ const authApi = baseApi.injectEndpoints({
         body: userInfo,
       }),
     }),
-    // logout:builder.mutation({
-    //     query
-    // })
   }),
 });
 
