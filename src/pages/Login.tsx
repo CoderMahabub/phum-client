@@ -1,5 +1,5 @@
-import { Button } from "antd";
-import { FieldValues, useForm, useFormContext } from "react-hook-form";
+import { Button, Row } from "antd";
+import { FieldValues } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useDispatch } from "react-redux";
 import { setUser, TUser } from "../redux/features/auth/authSlice";
@@ -23,32 +23,30 @@ const Login = () => {
 
   const onSubmit = async (data: FieldValues) => {
     console.log(data);
-    // const toastId = toast.loading("Logging In");
-    // try {
-    //   const userInfo = {
-    //     id: data.userId,
-    //     password: data.password,
-    //   };
-    //   const res = await login(userInfo).unwrap();
-    //   const user = verifyToken(res.data.accessToken) as TUser;
-    //   console.log(user);
-    //   dispatch(setUser({ user: user, token: res.data.accessToken }));
-    //   toast.success("Logged In", { id: toastId, duration: 2000 });
-    //   navigate(`/${user.role}/dashboard`);
-    // } catch (error) {
-    //   toast.error("Something went wrong", { id: toastId, duration: 2000 });
-    // }
+    const toastId = toast.loading("Logging In");
+    try {
+      const userInfo = {
+        id: data.userId,
+        password: data.password,
+      };
+      const res = await login(userInfo).unwrap();
+      const user = verifyToken(res.data.accessToken) as TUser;
+      console.log(user);
+      dispatch(setUser({ user: user, token: res.data.accessToken }));
+      toast.success("Logged In", { id: toastId, duration: 2000 });
+      navigate(`/${user.role}/dashboard`);
+    } catch (error) {
+      toast.error("Something went wrong", { id: toastId, duration: 2000 });
+    }
   };
   return (
-    <PHForm onSubmit={onSubmit}>
-      <div>
-        <PHInput type="text" name="id" label="ID:" />
-      </div>
-      <div>
-        <PHInput type="text" name="password" label="PASSWORD:" />
-      </div>
-      <Button htmlType="submit">login</Button>
-    </PHForm>
+    <Row justify="center" align="middle" style={{ height: "100vh" }}>
+      <PHForm onSubmit={onSubmit}>
+        <PHInput type="text" name="userId" label="ID:" />
+        <PHInput type="text" name="password" label="Password:" />
+        <Button htmlType="submit">login</Button>
+      </PHForm>
+    </Row>
   );
 };
 
